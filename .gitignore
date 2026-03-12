@@ -1,0 +1,31 @@
+# Dependências Node
+node_modules/
+package-lock.json
+package.json
+
+# Scripts internos de desenvolvimento
+extract_pdf_imgs.py
+extract_pdf_text.py
+mcp-client.mjs
+test-n8n-mcp.mjs
+
+# Configurações sensíveis e ferramentas MCP
+mcp.json
+mcp_tools.txt
+tools.json
+tools.txt
+domains.json
+leiria_texts.txt
+
+# Workflow n8n (contém configurações internas)
+n8n-workflow-denuncias.json
+
+# Imagens brutas extraídas do PDF (material interno)
+img/apres/
+
+# Imagem logo auxiliar não utilizada na produção
+img/parceiro-logo2.png
+
+# Playwright
+playwright-report/
+test-results/

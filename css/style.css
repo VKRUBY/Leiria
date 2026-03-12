@@ -264,17 +264,9 @@ img {
     font-size: 0.9rem;
 }
 
-.hero-title {
-    font-size: clamp(2.3rem, 5.5vw, 4.5rem);
-    font-weight: 800;
-    line-height: 1.1;
-    margin-bottom: 1.5rem;
-    max-width: 600px;
-}
+/* Removido .hero-title (Controlado via Tailwind) */
 
-.hero-title span {
-    color: var(--primary-color);
-}
+/* Removido .hero-title span (Controlado via Tailwind text-primary) */
 
 .hero-text {
     font-size: clamp(1rem, 2vw, 1.25rem);
@@ -364,29 +356,9 @@ img {
 /* ==========================================================================
    About Section
    ========================================================================== */
-.about {
-    padding: 8rem 0;
-    background-color: var(--bg-gray);
-}
+/* .about e .about-container refeitos com Tailwind */
 
-.about-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: center;
-}
-
-.about-image {
-    position: relative;
-    border-radius: 4px;
-    overflow: hidden;
-}
-
-.about-image img {
-    width: 100%;
-    height: 600px;
-    object-fit: cover;
-}
+/* As classes .about-image e .about-image img foram passadas para o Tailwind no HTML */
 
 .experience-badge {
     position: absolute;
@@ -836,9 +808,7 @@ img {
    Responsive & Media Queries
    ========================================================================== */
 @media (max-width: 1024px) {
-    .about-container {
-        gap: 2rem;
-    }
+    /* .about-container max-width 1024px removido */
 
     .portfolio-item-slide {
         min-width: calc(50% - 0.75rem);
@@ -905,13 +875,7 @@ img {
         transform: translateY(-8px) rotate(-45deg);
     }
 
-    .hero-title {
-        font-size: 1.7rem;
-        line-height: 1.1;
-        max-width: 95%;
-        margin-left: auto;
-        margin-right: auto;
-    }
+    /* Removido hero-title do media query 768px */
 
     .qualities-grid {
         grid-template-columns: 1fr;
@@ -926,13 +890,9 @@ img {
         margin-top: 0;
     }
 
-    .about-container {
-        grid-template-columns: 1fr;
-    }
+    /* .about-container max-width 768px removido */
 
-    .about-image img {
-        height: 400px;
-    }
+    /* about-image img substituído no HTML com Tailwind (md:h-[600px] h-[400px]) */
 
     .services-grid {
         grid-template-columns: 1fr;
@@ -971,6 +931,8 @@ img {
         min-width: 100%;
         /* 1 item visible */
     }
+
+    /* Removido hero-title do media query 480px */
 }
 
 /* Scroll Animations */
@@ -980,7 +942,244 @@ img {
     transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
+
 [data-animate].animated {
     opacity: 1;
     transform: translateY(0);
+}
+
+/* ==========================================================================
+   Central de Denúncias (Dropdown Form)
+   ========================================================================== */
+.denuncia-dropdown {
+    position: relative;
+    display: inline-block;
+    margin-left: 15px;
+}
+
+.denuncia-btn {
+    border-color: #e74c3c;
+    color: #e74c3c;
+}
+
+.denuncia-btn:hover {
+    background-color: #e74c3c;
+    color: #fff;
+    border-color: #e74c3c;
+}
+
+.denuncia-btn i {
+    margin-right: 5px;
+}
+
+/* Container escondido por padrão */
+.denuncia-form-container {
+    display: none;
+    position: absolute;
+    top: calc(100% + 15px);
+    right: 0;
+    width: 350px;
+    background-color: var(--bg-light);
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    padding: 20px;
+    z-index: 1001;
+    border: 1px solid #eaeaea;
+    cursor: default;
+}
+
+/* Classe para exibir o dropdown via JS */
+.denuncia-form-container.show {
+    display: block;
+    animation: fadeInDown 0.3s ease-out;
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.denuncia-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.denuncia-header h4 {
+    color: var(--text-dark);
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    color: #999;
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.close-btn:hover {
+    color: #e74c3c;
+}
+
+.denuncia-desc {
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 15px;
+    line-height: 1.4;
+}
+
+.denuncia-form .form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.denuncia-form label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.denuncia-form input,
+.denuncia-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: var(--font-main);
+    font-size: 0.9rem;
+    transition: var(--transition-fast);
+}
+
+.denuncia-form input:focus,
+.denuncia-form textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(247, 195, 37, 0.2);
+}
+
+.denuncia-form .submit-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #e74c3c;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.denuncia-form .submit-btn:hover {
+    background-color: #c0392b;
+}
+
+.form-message {
+    margin-top: 10px;
+    font-size: 0.85rem;
+    text-align: center;
+    font-weight: 600;
+}
+
+.form-message.success {
+    color: #27ae60;
+}
+
+.form-message.error {
+    color: #e74c3c;
+}
+
+/* Responsivo para o formulário no mobile */
+@media (max-width: 768px) {
+    .denuncia-dropdown {
+        margin: 15px auto 0;
+        display: block;
+        width: 90%;
+    }
+
+    .denuncia-btn {
+        width: 100%;
+    }
+
+    .denuncia-form-container {
+        position: static;
+        width: 100%;
+        margin-top: 10px;
+        box-shadow: none;
+        border: 1px solid #333;
+        /* border color to match mobile dark menu */
+        background-color: var(--bg-darker);
+    }
+
+    .denuncia-header h4,
+    .denuncia-form label,
+    .denuncia-desc {
+        color: var(--text-light);
+    }
+
+    .denuncia-header {
+        border-bottom-color: #333;
+    }
+
+    .denuncia-form input,
+    .denuncia-form textarea {
+        background-color: #222;
+        color: #fff;
+        border-color: #444;
+    }
+}
+
+/* ==========================================================================
+   Portfolio Carrossel Focado (Novo)
+   ========================================================================== */
+#portfolio-track-new {
+    will-change: transform;
+    transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.portfolio-slide-item {
+    flex-shrink: 0;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.portfolio-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1.5rem;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, transparent 100%);
+    color: #fff;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    z-index: 2;
+}
+
+.portfolio-info h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+    color: #fff;
+}
+
+.portfolio-info span {
+    font-size: 0.8rem;
+    color: #F7C325;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
 }

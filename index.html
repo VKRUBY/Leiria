@@ -18,7 +18,21 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/style.css?v=2">
+    <link rel="stylesheet" href="css/style.css?v=8">
+
+    <!-- Tailwind CSS (CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#F7C325',
+                    }
+                }
+            }
+        }
+    </script>
 </head>
 
 <body>
@@ -38,6 +52,45 @@
                     <li><a href="#contato" class="nav-link">Contato</a></li>
                 </ul>
                 <a href="#contato" class="btn btn-primary nav-cta">Fale Conosco</a>
+
+                <!-- Botão Central de Denúncias -->
+                <div class="denuncia-dropdown">
+                    <button class="btn btn-outline denuncia-btn" id="denuncia-btn">
+                        <i class="fa-solid fa-bullhorn"></i> Central de Denúncias
+                    </button>
+                    <!-- Form Container (Hidden by Default) -->
+                    <div class="denuncia-form-container" id="denuncia-form-container">
+                        <div class="denuncia-header">
+                            <h4>Fazer um relato</h4>
+                            <button id="close-denuncia" class="close-btn"><i class="fa-solid fa-xmark"></i></button>
+                        </div>
+                        <p class="denuncia-desc">Sua denúncia é segura. Descreva o ocorrido abaixo.</p>
+                        <form id="denuncia-form" class="denuncia-form">
+                            <div class="form-group">
+                                <label for="denuncia-empresa">Empresa Relacionada</label>
+                                <input type="text" id="denuncia-empresa" name="empresa" placeholder="Ex: Fornecedor X"
+                                    required>
+                            </div>
+                            <div class="form-group">
+                                <label for="denuncia-nome">Seu Nome (Opcional)</label>
+                                <input type="text" id="denuncia-nome" name="nome"
+                                    placeholder="Se desejar se identificar">
+                            </div>
+                            <div class="form-group">
+                                <label for="denuncia-cnpj">CNPJ / CPF</label>
+                                <input type="text" id="denuncia-cnpj" name="cnpj" placeholder="00.000.000/0000-00">
+                            </div>
+                            <div class="form-group">
+                                <label for="denuncia-relato">Relato Completo *</label>
+                                <textarea id="denuncia-relato" name="relato" rows="4"
+                                    placeholder="Descreva os fatos detalhadamente..." required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary submit-btn" id="btn-submit-denuncia">Enviar
+                                Denúncia</button>
+                            <div id="denuncia-message" class="form-message"></div>
+                        </form>
+                    </div>
+                </div>
             </nav>
 
             <div class="hamburger" id="hamburger">
@@ -53,7 +106,10 @@
         <div class="hero-overlay"></div>
         <div class="container hero-content">
             <span class="hero-subtitle" data-animate>Desde 1994</span>
-            <h1 class="hero-title" data-animate>Construindo o futuro com <span>eficiência</span> e atenção aos detalhes.
+            <h1 class="text-3xl md:text-5xl lg:text-7xl font-extrabold leading-tight tracking-tight mb-4 max-w-[95%] text-white"
+                data-animate>
+                Construindo o futuro com <span class="text-primary">eficiência</span><br class="hidden sm:block"> e
+                atenção aos detalhes.
             </h1>
             <p class="hero-text" data-animate>A Leiria é uma referência na área da construção civil. Oferecemos serviços
                 especializados priorizando o atendimento personalizado e buscando superar suas expectativas.</p>
@@ -86,23 +142,71 @@
     </section>
 
     <!-- Sobre Section -->
-    <section class="about" id="sobre">
-        <div class="container about-container">
-            <div class="about-image" data-animate>
-                <img src="img/capa-whats.jpg" alt="Construção Leiria">
-                <div class="experience-badge">
+    <section class="about py-32 bg-gray-50" id="sobre">
+        <div class="container mx-auto px-5 grid gap-16 lg:grid-cols-2 items-center">
+            <div class="about-image relative rounded-2xl overflow-hidden shadow-2xl h-[400px] md:h-[600px] w-full"
+                data-animate>
+                <!-- Foto real de obra (andaime ao pôr do sol) -->
+                <img src="img/obra-principal.jpg" alt="Construção Leiria"
+                    class="absolute inset-0 w-full h-full object-cover object-center">
+                <!-- Overlay gradiente sutil -->
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                <!-- Badge parceiro - canto superior direito -->
+                <div
+                    class="absolute top-4 right-4 bg-white/95 backdrop-blur-sm rounded-xl px-3 py-2 shadow-lg flex items-center gap-2 border border-white/50">
+                    <div class="text-right">
+                        <p class="text-[9px] uppercase tracking-widest text-gray-400 font-semibold leading-none mb-1">
+                            Parceiro</p>
+                        <img src="img/parceiro-canoas.jpg" alt="Canoas Shopping" class="h-7 w-auto object-contain">
+                    </div>
+                </div>
+                <!-- Badge +20 anos no canto inferior esquerdo -->
+                <div class="experience-badge z-10">
                     <span class="years">+20</span>
                     <span class="text">Anos de<br>História</span>
                 </div>
             </div>
             <div class="about-content" data-animate>
-                <span class="section-subtitle">A nossa jornada</span>
-                <h2 class="section-title">Qualidade com <span>transparência</span> e clareza.</h2>
-                <p class="section-text">A Leiria é uma referência na área da construção civil desde 1994. Construímos
-                    relacionamentos duradouros baseados na confiança, respeito e benefício mútuo.</p>
-                <p class="section-text">A nossa empresa se destaca por sua equipe experiente, uso de materiais de alta
-                    qualidade e técnicas inovadoras. Trabalhamos com rigor em todas as etapas de projeto.</p>
-                <a href="#contato" class="btn btn-secondary">Conheça nossa História</a>
+                <span class="section-subtitle">Quem Somos</span>
+                <h2 class="section-title">Construindo com <span>excelência</span> e confiança.</h2>
+                <p class="section-text opacity-90 mb-6">A Leiria atua na construção civil desde 1994 oferecendo a melhor
+                    solução operacional com um excelente custo-benefício, mantendo o compromisso de satisfazer clientes,
+                    parceiros e colaboradores.</p>
+
+                <div class="grid gap-6 mb-8 lg:grid-cols-2">
+                    <div
+                        class="bg-white p-5 rounded-xl shadow-sm border border-gray-100 border-l-4 border-l-primary hover:shadow-md transition">
+                        <h3 class="text-lg font-bold mb-2 flex items-center text-gray-800"><i
+                                class="fa-solid fa-bullseye text-primary mr-2"></i> Nossa Missão</h3>
+                        <p class="text-sm text-gray-600 leading-relaxed tracking-wide">Entregar serviços com qualidade,
+                            eficiência e confiança, por meio de uma equipe qualificada e comprometida.</p>
+                    </div>
+                    <div
+                        class="bg-white p-5 rounded-xl shadow-sm border border-gray-100 border-l-4 border-l-primary hover:shadow-md transition">
+                        <h3 class="text-lg font-bold mb-2 flex items-center text-gray-800"><i
+                                class="fa-solid fa-eye text-primary mr-2"></i> Nossa Visão</h3>
+                        <p class="text-sm text-gray-600 leading-relaxed tracking-wide">Ser reconhecida como referência
+                            na prestação de serviços no setor da construção civil, fortalecendo parcerias sólidas.</p>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <h4 class="font-bold text-gray-800 mb-3 text-lg"><i class="fa-solid fa-star text-primary mr-2"></i>
+                        Valores Principais</h4>
+                    <div class="flex flex-wrap gap-2">
+                        <span
+                            class="px-4 py-1.5 bg-gray-200 text-gray-800 rounded-full text-xs font-bold uppercase tracking-wider">Qualidade</span>
+                        <span
+                            class="px-4 py-1.5 bg-gray-200 text-gray-800 rounded-full text-xs font-bold uppercase tracking-wider">Responsabilidade</span>
+                        <span
+                            class="px-4 py-1.5 bg-gray-200 text-gray-800 rounded-full text-xs font-bold uppercase tracking-wider">Pontualidade</span>
+                        <span
+                            class="px-4 py-1.5 bg-gray-200 text-gray-800 rounded-full text-xs font-bold uppercase tracking-wider">Transparência</span>
+                        <span
+                            class="px-4 py-1.5 bg-gray-200 text-gray-800 rounded-full text-xs font-bold uppercase tracking-wider">Foco
+                            no Cliente</span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -175,64 +279,281 @@
                     <span class="section-subtitle">Nosso Portfólio</span>
                     <h2 class="section-title">Obras em <span>Destaque</span></h2>
                 </div>
-                <div class="carousel-nav">
-                    <button class="carousel-btn prev-btn"><i class="fa-solid fa-chevron-left"></i></button>
-                    <button class="carousel-btn next-btn"><i class="fa-solid fa-chevron-right"></i></button>
-                    <a href="#" class="btn btn-outline" style="margin-left: 15px;">Todos os projetos</a>
-                </div>
             </div>
 
-            <div class="carousel-container" data-animate>
-                <div class="carousel-track" id="portfolio-track">
-                    <!-- Item 1 -->
-                    <a href="#" class="portfolio-item-slide">
-                        <img src="https://images.pexels.com/photos/157811/pexels-photo-157811.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                            alt="Obra 1">
-                        <div class="portfolio-info">
-                            <h4>Sede Corporativa Sul</h4>
-                            <span>Edificação Comercial</span>
+            <!-- Carrossel Infinito (loop sem começo e sem fim) -->
+            <div class="relative" data-animate id="portfolio-carousel-wrap" style="overflow:hidden;">
+                <div class="flex gap-5" id="portfolio-track-new"
+                    style="transition: transform 0.7s cubic-bezier(0.4,0,0.2,1); will-change: transform;">
+
+                    <!-- Item 1 - Canoas Shopping -->
+                    <div class="portfolio-slide-item flex-shrink-0">
+                        <div class="relative h-[340px] rounded-2xl overflow-hidden group cursor-pointer shadow-xl">
+                            <img src="img/obra-principal.jpg" alt="Canoas Shopping"
+                                class="w-full h-full object-cover object-center transition duration-700 group-hover:scale-105">
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                            </div>
+                            <div class="portfolio-info group-hover:opacity-100 group-hover:translate-y-0">
+                                <h4>Canoas Shopping</h4>
+                                <span>Edificação Comercial</span>
+                            </div>
+                            <div
+                                class="absolute top-3 right-3 bg-white/95 backdrop-blur-sm rounded-xl px-3 py-2 shadow-lg border border-white/40">
+                                <p
+                                    class="text-[8px] uppercase tracking-widest text-gray-400 font-semibold leading-none mb-1">
+                                    Parceiro</p>
+                                <img src="img/parceiro-canoas.jpg" alt="Canoas Shopping"
+                                    class="h-6 w-auto object-contain">
+                            </div>
                         </div>
-                    </a>
-                    <!-- Item 2 -->
-                    <a href="#" class="portfolio-item-slide">
-                        <img src="https://images.pexels.com/photos/224924/pexels-photo-224924.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                            alt="Obra 2">
-                        <div class="portfolio-info">
-                            <h4>Complexo Logístico Alpha</h4>
-                            <span>Obra Industrial</span>
+                    </div>
+
+                    <!-- Item 2 - GNC Cinemas -->
+                    <div class="portfolio-slide-item flex-shrink-0">
+                        <div class="relative h-[340px] rounded-2xl overflow-hidden group cursor-pointer shadow-xl">
+                            <img src="img/obra2.jpg" alt="GNC Cinemas"
+                                class="w-full h-full object-cover object-center transition duration-700 group-hover:scale-105">
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                            </div>
+                            <div class="portfolio-info group-hover:opacity-100 group-hover:translate-y-0">
+                                <h4>GNC Cinemas</h4>
+                                <span>Obra Comercial</span>
+                            </div>
+                            <div
+                                class="absolute top-3 right-3 bg-white/95 backdrop-blur-sm rounded-xl px-3 py-2 shadow-lg border border-white/40">
+                                <p
+                                    class="text-[8px] uppercase tracking-widest text-gray-400 font-semibold leading-none mb-1">
+                                    Parceiro</p>
+                                <img src="img/parceiro-gnc.jpg" alt="GNC Cinemas" class="h-6 w-auto object-contain">
+                            </div>
                         </div>
-                    </a>
-                    <!-- Item 3 -->
-                    <a href="#" class="portfolio-item-slide">
-                        <img src="https://images.pexels.com/photos/224924/pexels-photo-224924.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                            alt="Obra 3">
-                        <div class="portfolio-info">
-                            <h4>Viaduto Metropolitano</h4>
-                            <span>Infraestrutura</span>
+                    </div>
+
+                    <!-- Item 3 - Lotus Incorporadora -->
+                    <div class="portfolio-slide-item flex-shrink-0">
+                        <div class="relative h-[340px] rounded-2xl overflow-hidden group cursor-pointer shadow-xl">
+                            <img src="img/obra3.jpg" alt="Lotus Incorporadora"
+                                class="w-full h-full object-cover object-center transition duration-700 group-hover:scale-105">
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                            </div>
+                            <div class="portfolio-info group-hover:opacity-100 group-hover:translate-y-0">
+                                <h4>Lotus Incorporadora</h4>
+                                <span>Residencial Alto Padrão</span>
+                            </div>
+                            <div
+                                class="absolute top-3 right-3 bg-white/95 backdrop-blur-sm rounded-xl px-3 py-2 shadow-lg border border-white/40">
+                                <p
+                                    class="text-[8px] uppercase tracking-widest text-gray-400 font-semibold leading-none mb-1">
+                                    Parceiro</p>
+                                <img src="img/parceiro-lotus.jpg" alt="Lotus Incorporadora"
+                                    class="h-6 w-auto object-contain">
+                            </div>
                         </div>
-                    </a>
-                    <!-- Item 4 (Extra for sliding) -->
-                    <a href="#" class="portfolio-item-slide">
-                        <img src="https://images.pexels.com/photos/110813/pexels-photo-110813.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                            alt="Obra 4">
-                        <div class="portfolio-info">
-                            <h4>Residencial Aurora</h4>
-                            <span>Acabamento & Drywall</span>
+                    </div>
+
+                    <!-- Item 4 - Nex Group -->
+                    <div class="portfolio-slide-item flex-shrink-0">
+                        <div class="relative h-[340px] rounded-2xl overflow-hidden group cursor-pointer shadow-xl">
+                            <img src="img/obra4.jpg" alt="Nex Group"
+                                class="w-full h-full object-cover object-center transition duration-700 group-hover:scale-105">
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                            </div>
+                            <div class="portfolio-info group-hover:opacity-100 group-hover:translate-y-0">
+                                <h4>Nex Group</h4>
+                                <span>Complexo Corporativo</span>
+                            </div>
+                            <div
+                                class="absolute top-3 right-3 bg-white/95 backdrop-blur-sm rounded-xl px-3 py-2 shadow-lg border border-white/40">
+                                <p
+                                    class="text-[8px] uppercase tracking-widest text-gray-400 font-semibold leading-none mb-1">
+                                    Parceiro</p>
+                                <img src="img/parceiro-nex.png" alt="Nex Group" class="h-6 w-auto object-contain">
+                            </div>
                         </div>
-                    </a>
-                    <!-- Item 5 (Extra for sliding) -->
-                    <a href="#" class="portfolio-item-slide">
-                        <img src="https://images.pexels.com/photos/2209529/pexels-photo-2209529.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                            alt="Obra 5">
-                        <div class="portfolio-info">
-                            <h4>Expansão Fabril</h4>
-                            <span>Obras Industriais</span>
+                    </div>
+
+                    <!-- Item 5 - Obra Litorânea -->
+                    <div class="portfolio-slide-item flex-shrink-0">
+                        <div class="relative h-[340px] rounded-2xl overflow-hidden group cursor-pointer shadow-xl">
+                            <img src="img/obra5.jpg" alt="Restauração Estrutural"
+                                class="w-full h-full object-cover object-center transition duration-700 group-hover:scale-105">
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                            </div>
+                            <div class="portfolio-info group-hover:opacity-100 group-hover:translate-y-0">
+                                <h4>Restauração Litorânea</h4>
+                                <span>Restauração Estrutural</span>
+                            </div>
+                            <div
+                                class="absolute top-3 right-3 bg-white/95 backdrop-blur-sm rounded-xl px-3 py-2 shadow-lg border border-white/40">
+                                <p
+                                    class="text-[8px] uppercase tracking-widest text-gray-400 font-semibold leading-none mb-1">
+                                    Parceiro</p>
+                                <img src="img/parceiro-canoas.jpg" alt="Canoas Shopping"
+                                    class="h-6 w-auto object-contain">
+                            </div>
                         </div>
-                    </a>
+                    </div>
+
+                </div>
+                <!-- Dots -->
+                <div class="flex justify-center gap-2 mt-6" id="portfolio-dots"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Linha do Tempo Cronológica -->
+    <section class="py-24 bg-white" id="historia">
+        <div class="container mx-auto px-5">
+            <div class="text-center mb-16" data-animate>
+                <span class="section-subtitle">Nossa Trajetória</span>
+                <h2 class="section-title">Uma história de <span>conquistas</span></h2>
+            </div>
+
+            <div class="relative" data-animate>
+                <!-- Linha central -->
+                <div
+                    class="absolute left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-yellow-400 via-yellow-300 to-yellow-100 -translate-x-1/2">
+                </div>
+
+                <div class="space-y-12">
+
+                    <!-- 1994 - Fundação -->
+                    <div class="flex items-center gap-8">
+                        <div class="w-1/2 text-right pr-12" data-animate>
+                            <div
+                                class="inline-block bg-white rounded-2xl shadow-lg p-6 border border-gray-100 text-left max-w-xs ml-auto">
+                                <p class="text-xs font-bold text-yellow-500 uppercase tracking-widest mb-1">1994</p>
+                                <h4 class="font-bold text-gray-800 text-lg leading-snug mb-2">Fundação da Leiria</h4>
+                                <p class="text-gray-500 text-sm">Início das operações em construção e manutenção civil
+                                    com foco em qualidade e relacionamentos duradouros.</p>
+                            </div>
+                        </div>
+                        <div
+                            class="w-6 h-6 rounded-full bg-yellow-400 border-4 border-white shadow-md flex-shrink-0 z-10 relative">
+                        </div>
+                        <div class="w-1/2"></div>
+                    </div>
+
+                    <!-- Anos 2000 - Expansão de serviços -->
+                    <div class="flex items-center gap-8">
+                        <div class="w-1/2"></div>
+                        <div
+                            class="w-6 h-6 rounded-full bg-yellow-400 border-4 border-white shadow-md flex-shrink-0 z-10 relative">
+                        </div>
+                        <div class="w-1/2 pl-12" data-animate>
+                            <div
+                                class="inline-block bg-white rounded-2xl shadow-lg p-6 border border-gray-100 max-w-xs">
+                                <p class="text-xs font-bold text-yellow-500 uppercase tracking-widest mb-1">Anos 2000
+                                </p>
+                                <h4 class="font-bold text-gray-800 text-lg leading-snug mb-2">Expansão de Serviços</h4>
+                                <p class="text-gray-500 text-sm">Incorporação de serviços especializados em pintura,
+                                    revestimentos, drywall e restauração estrutural.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Canoas Shopping -->
+                    <div class="flex items-center gap-8">
+                        <div class="w-1/2 text-right pr-12" data-animate>
+                            <div
+                                class="inline-block bg-white rounded-2xl shadow-lg p-6 border border-gray-100 text-left max-w-xs ml-auto">
+                                <p class="text-xs font-bold text-yellow-500 uppercase tracking-widest mb-1">Marco</p>
+                                <h4 class="font-bold text-gray-800 text-lg leading-snug mb-2">Canoas Shopping</h4>
+                                <p class="text-gray-500 text-sm">Execução das obras de edificação comercial do Canoas
+                                    Shopping, um dos projetos de maior porte da trajetória.</p>
+                                <img src="img/parceiro-canoas.jpg" alt="Canoas Shopping"
+                                    class="h-7 mt-3 object-contain">
+                            </div>
+                        </div>
+                        <div
+                            class="w-6 h-6 rounded-full bg-yellow-400 border-4 border-white shadow-md flex-shrink-0 z-10 relative">
+                        </div>
+                        <div class="w-1/2"></div>
+                    </div>
+
+                    <!-- GNC Cinemas -->
+                    <div class="flex items-center gap-8">
+                        <div class="w-1/2"></div>
+                        <div
+                            class="w-6 h-6 rounded-full bg-yellow-400 border-4 border-white shadow-md flex-shrink-0 z-10 relative">
+                        </div>
+                        <div class="w-1/2 pl-12" data-animate>
+                            <div
+                                class="inline-block bg-white rounded-2xl shadow-lg p-6 border border-gray-100 max-w-xs">
+                                <p class="text-xs font-bold text-yellow-500 uppercase tracking-widest mb-1">Marco</p>
+                                <h4 class="font-bold text-gray-800 text-lg leading-snug mb-2">GNC Cinemas</h4>
+                                <p class="text-gray-500 text-sm">Parceria com o Grupo GNC para obras de acabamento e
+                                    adequação dos espaços cinematográficos.</p>
+                                <img src="img/parceiro-gnc.jpg" alt="GNC Cinemas" class="h-7 mt-3 object-contain">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Lotus Incorporadora -->
+                    <div class="flex items-center gap-8">
+                        <div class="w-1/2 text-right pr-12" data-animate>
+                            <div
+                                class="inline-block bg-white rounded-2xl shadow-lg p-6 border border-gray-100 text-left max-w-xs ml-auto">
+                                <p class="text-xs font-bold text-yellow-500 uppercase tracking-widest mb-1">Marco</p>
+                                <h4 class="font-bold text-gray-800 text-lg leading-snug mb-2">Lotus Incorporadora</h4>
+                                <p class="text-gray-500 text-sm">Atuação em empreendimento residencial de alto padrão em
+                                    parceria com a Lotus Incorporadora.</p>
+                                <img src="img/parceiro-lotus.jpg" alt="Lotus" class="h-7 mt-3 object-contain">
+                            </div>
+                        </div>
+                        <div
+                            class="w-6 h-6 rounded-full bg-yellow-400 border-4 border-white shadow-md flex-shrink-0 z-10 relative">
+                        </div>
+                        <div class="w-1/2"></div>
+                    </div>
+
+                    <!-- Nex Group -->
+                    <div class="flex items-center gap-8">
+                        <div class="w-1/2"></div>
+                        <div
+                            class="w-6 h-6 rounded-full bg-yellow-400 border-4 border-white shadow-md flex-shrink-0 z-10 relative">
+                        </div>
+                        <div class="w-1/2 pl-12" data-animate>
+                            <div
+                                class="inline-block bg-white rounded-2xl shadow-lg p-6 border border-gray-100 max-w-xs">
+                                <p class="text-xs font-bold text-yellow-500 uppercase tracking-widest mb-1">Marco</p>
+                                <h4 class="font-bold text-gray-800 text-lg leading-snug mb-2">Nex Group</h4>
+                                <p class="text-gray-500 text-sm">Entrega de complexo corporativo para o Nex Group,
+                                    consolidando a Leiria no segmento de edificações de médio e grande porte.</p>
+                                <img src="img/parceiro-nex.png" alt="Nex Group" class="h-7 mt-3 object-contain">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hoje -->
+                    <div class="flex items-center gap-8">
+                        <div class="w-1/2 text-right pr-12" data-animate>
+                            <div
+                                class="inline-block bg-yellow-400 rounded-2xl shadow-lg p-6 text-left max-w-xs ml-auto">
+                                <p class="text-xs font-bold text-yellow-900 uppercase tracking-widest mb-1">Hoje</p>
+                                <h4 class="font-bold text-gray-900 text-lg leading-snug mb-2">+30 Anos de Construção
+                                </h4>
+                                <p class="text-gray-800 text-sm">Uma carteira diversificada e renomada de clientes.
+                                    Pronta para ser sua próxima parceria de sucesso.</p>
+                            </div>
+                        </div>
+                        <div
+                            class="w-6 h-6 rounded-full bg-yellow-400 border-4 border-white shadow-md flex-shrink-0 z-10 relative ring-4 ring-yellow-200">
+                        </div>
+                        <div class="w-1/2"></div>
+                    </div>
+
                 </div>
             </div>
         </div>
     </section>
+
+
 
     <!-- Contato / Footer -->
     <footer class="footer" id="contato">
