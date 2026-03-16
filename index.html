@@ -55,45 +55,6 @@
                     <li><a href="#contato" class="nav-link">Contato</a></li>
                 </ul>
                 <a href="#contato" class="btn btn-primary nav-cta">Fale Conosco</a>
-
-                <!-- Botão Central de Denúncias -->
-                <div class="denuncia-dropdown">
-                    <button class="btn btn-outline denuncia-btn" id="denuncia-btn">
-                        <i class="fa-solid fa-bullhorn"></i> Central de Denúncias
-                    </button>
-                    <!-- Form Container (Hidden by Default) -->
-                    <div class="denuncia-form-container" id="denuncia-form-container">
-                        <div class="denuncia-header">
-                            <h4>Fazer um relato</h4>
-                            <button id="close-denuncia" class="close-btn"><i class="fa-solid fa-xmark"></i></button>
-                        </div>
-                        <p class="denuncia-desc">Sua denúncia é segura. Descreva o ocorrido abaixo.</p>
-                        <form id="denuncia-form" class="denuncia-form">
-                            <div class="form-group">
-                                <label for="denuncia-empresa">Empresa Relacionada</label>
-                                <input type="text" id="denuncia-empresa" name="empresa" placeholder="Ex: Fornecedor X"
-                                    required>
-                            </div>
-                            <div class="form-group">
-                                <label for="denuncia-nome">Seu Nome (Opcional)</label>
-                                <input type="text" id="denuncia-nome" name="nome"
-                                    placeholder="Se desejar se identificar">
-                            </div>
-                            <div class="form-group">
-                                <label for="denuncia-cnpj">CNPJ / CPF</label>
-                                <input type="text" id="denuncia-cnpj" name="cnpj" placeholder="00.000.000/0000-00">
-                            </div>
-                            <div class="form-group">
-                                <label for="denuncia-relato">Relato Completo *</label>
-                                <textarea id="denuncia-relato" name="relato" rows="4"
-                                    placeholder="Descreva os fatos detalhadamente..." required></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary submit-btn" id="btn-submit-denuncia">Enviar
-                                Denúncia</button>
-                            <div id="denuncia-message" class="form-message"></div>
-                        </form>
-                    </div>
-                </div>
             </nav>
 
             <div class="hamburger" id="hamburger">
@@ -109,13 +70,12 @@
         <div class="hero-overlay"></div>
         <div class="container hero-content">
             <span class="hero-subtitle" data-animate>Desde 1994</span>
-            <h1 class="text-3xl md:text-5xl lg:text-7xl font-extrabold leading-tight tracking-tight mb-4 max-w-[95%] text-white"
+            <h1 class="text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight mb-4 max-w-[95%] text-white"
                 data-animate>
                 Construindo o futuro com <span class="text-primary">eficiência</span><br class="hidden sm:block"> e
                 atenção aos detalhes.
             </h1>
-            <p class="hero-text" data-animate>A Leiria é uma referência na área da construção civil. Oferecemos serviços
-                especializados priorizando o atendimento personalizado e buscando superar suas expectativas.</p>
+            <p class="hero-text" data-animate>Somos referência na area da construção civil de toda região sul.</p>
             <div class="hero-buttons" data-animate>
                 <a href="#atuacao" class="btn btn-primary">Nossos Serviços</a>
                 <a href="#portfolio" class="btn btn-outline">Ver Portfólio</a>
@@ -145,7 +105,7 @@
                 </div>
                 <!-- Badge +20 anos no canto inferior esquerdo -->
                 <div class="experience-badge z-10">
-                    <span class="years">+20</span>
+                    <span class="years">+30</span>
                     <span class="text">Anos de<br>História</span>
                 </div>
             </div>
@@ -175,7 +135,7 @@
 
                 <div class="mb-4">
                     <h4 class="font-bold text-gray-800 mb-3 text-lg"><i class="fa-solid fa-star text-primary mr-2"></i>
-                        Valores Principais</h4>
+                        Principais Valores</h4>
                     <div class="flex flex-wrap gap-2">
                         <span
                             class="px-4 py-1.5 bg-gray-200 text-gray-800 rounded-full text-xs font-bold uppercase tracking-wider">Qualidade</span>
@@ -221,8 +181,7 @@
                     </div>
                     <div class="service-content">
                         <h3>Restauração Estrutural</h3>
-                        <p>Tratamentos e recuperação de estruturas, pintura exterior, revestimentos para alta
-                            durabilidade.</p>
+                        <p>Tratamentos e recuperação de estruturas para alta durabilidade.</p>
                         <a href="#contato" class="service-link"><i class="fa-solid fa-arrow-right"></i></a>
                     </div>
                 </div>
@@ -233,7 +192,7 @@
                     </div>
                     <div class="service-content">
                         <h3>Acabamentos & Drywall</h3>
-                        <p>Instalação profissional de drywall, acabamentos internos, pintura de interiores e
+                        <p>Instalação profissional de drywall, revestimentos, pintura em geral e
                             personalização de espaços.</p>
                         <a href="#contato" class="service-link"><i class="fa-solid fa-arrow-right"></i></a>
                     </div>
@@ -248,8 +207,8 @@
         <div class="cta-overlay"></div>
         <div class="container cta-content" data-animate>
             <h2>Tem um grande projeto em mente?</h2>
-            <p>Nossa equipe de engenheiros e arquitetos está pronta para viabilizar sua obra com excelência, do início à
-                entrega das chaves.</p>
+            <p>Conte conosco, nossa equipe está pronta para viabilizar sua obra com excelência e qualidade do início ao
+                fim.</p>
             <a href="#contato" class="btn btn-primary">Solicite um Orçamento</a>
         </div>
     </section>
@@ -559,7 +518,8 @@
                     <li><a href="#sobre">Institucional</a></li>
                     <li><a href="#atuacao">Serviços</a></li>
                     <li><a href="#portfolio">Projetos Executados</a></li>
-                    <li><a href="#">Canal de Ética</a></li>
+                    <li><a href="#" id="footer-etica-link"><i class="fa-solid fa-shield-halved"
+                                style="margin-right:5px;"></i>Canal de Ética</a></li>
                     <li><a href="#">Trabalhe Conosco</a></li>
                 </ul>
             </div>
@@ -568,15 +528,32 @@
                 <h3>Contato</h3>
                 <ul class="contact-list-avatars">
                     <li>
-                        <img src="img/gregory.jpg" alt="Gregory" class="contact-avatar">
-                        <span><i class="fa-brands fa-whatsapp"></i> (51) 99684-7446 (Gregory - Diretor)</span>
+                        <a href="https://wa.me/5551991245828" target="_blank" rel="noopener noreferrer"
+                            class="contact-row hover:text-primary transition-colors">
+                            <i class="fa-brands fa-whatsapp text-primary"></i>
+                            <span>(51) 99124-5828</span>
+                        </a>
                     </li>
                     <li>
-                        <img src="img/rafaela.jpg" alt="Comercial" class="contact-avatar">
-                        <span><i class="fa-brands fa-whatsapp"></i> (51) 99316-1034 (Juliane - Comercial)</span>
+                        <div class="contact-row cursor-pointer" onclick="copyEmail('leiria@grupoleiria.com', this)">
+                            <i class="fa-solid fa-envelope text-primary"></i>
+                            <a href="mailto:leiria@grupoleiria.com"
+                                class="hover:text-primary transition-colors underline">leiria@grupoleiria.com</a>
+                            <span
+                                class="copy-feedback text-[10px] text-primary opacity-0 transition-opacity">Copiado!</span>
+                        </div>
                     </li>
-                    <li style="margin-top: 15px;">
-                        <span><i class="fa-solid fa-envelope"></i> empreiteira.leiria@gmail.com</span>
+                    <li>
+                        <div class="flex flex-col gap-1">
+                            <div class="contact-row cursor-pointer" onclick="copyEmail('rh@grupoleiria.com', this)">
+                                <i class="fa-solid fa-briefcase text-primary"></i>
+                                <a href="mailto:rh@grupoleiria.com"
+                                    class="hover:text-primary transition-colors underline">rh@grupoleiria.com</a>
+                                <span
+                                    class="copy-feedback text-[10px] text-primary opacity-0 transition-opacity">Copiado!</span>
+                            </div>
+                            <span class="contact-sublabel">Trabalhe Conosco</span>
+                        </div>
                     </li>
                 </ul>
             </div>
@@ -593,6 +570,42 @@
             </div>
         </div>
     </footer>
+
+    <!-- Botão flutuante do WhatsApp -->
+    <a href="https://wa.me/5551991245828" class="whatsapp-float" target="_blank" rel="noopener noreferrer">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- Modal: Canal de Ética -->
+    <div class="denuncia-overlay" id="denuncia-overlay"></div>
+    <div class="denuncia-modal" id="denuncia-form-container">
+        <div class="denuncia-header">
+            <h4><i class="fa-solid fa-shield-halved" style="margin-right:8px;"></i>Canal de Ética</h4>
+            <button id="close-denuncia" class="close-btn"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <p class="denuncia-desc">Seu relato é confidencial. Descreva o ocorrido abaixo.</p>
+        <form id="denuncia-form" class="denuncia-form">
+            <div class="form-group">
+                <label for="denuncia-empresa">Empresa Relacionada</label>
+                <input type="text" id="denuncia-empresa" name="empresa" placeholder="Ex: Fornecedor X" required>
+            </div>
+            <div class="form-group">
+                <label for="denuncia-nome">Seu Nome (Opcional)</label>
+                <input type="text" id="denuncia-nome" name="nome" placeholder="Se desejar se identificar">
+            </div>
+            <div class="form-group">
+                <label for="denuncia-cnpj">CNPJ / CPF</label>
+                <input type="text" id="denuncia-cnpj" name="cnpj" placeholder="00.000.000/0000-00">
+            </div>
+            <div class="form-group">
+                <label for="denuncia-relato">Relato Completo *</label>
+                <textarea id="denuncia-relato" name="relato" rows="4" placeholder="Descreva os fatos detalhadamente..."
+                    required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary submit-btn" id="btn-submit-denuncia">Enviar Relato</button>
+            <div id="denuncia-message" class="form-message"></div>
+        </form>
+    </div>
 
     <!-- Custom JS -->
     <script src="js/main.js"></script>

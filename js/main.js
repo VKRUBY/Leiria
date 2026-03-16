@@ -182,36 +182,53 @@ document.addEventListener('DOMContentLoaded', () => {
         yearSpan.textContent = new Date().getFullYear();
     }
 
-    // 6. Central de Denúncias Logic
-    const denunciaBtn = document.getElementById('denuncia-btn');
+    // 6. Canal de Ética - Modal Logic
     const denunciaFormContainer = document.getElementById('denuncia-form-container');
+    const denunciaOverlay = document.getElementById('denuncia-overlay');
     const closeDenunciaBtn = document.getElementById('close-denuncia');
     const denunciaForm = document.getElementById('denuncia-form');
     const denunciaMessage = document.getElementById('denuncia-message');
     const btnSubmitDenuncia = document.getElementById('btn-submit-denuncia');
+    const footerEticaLink = document.getElementById('footer-etica-link');
 
-    if (denunciaBtn && denunciaFormContainer && closeDenunciaBtn && denunciaForm) {
+    function openEticaModal() {
+        denunciaFormContainer.classList.add('show');
+        denunciaOverlay.classList.add('show');
+        document.body.style.overflow = 'hidden';
+    }
 
-        // Toggle dropdown form
-        denunciaBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            denunciaFormContainer.classList.toggle('show');
+    function closeEticaModal() {
+        denunciaFormContainer.classList.remove('show');
+        denunciaOverlay.classList.remove('show');
+        document.body.style.overflow = '';
+    }
+
+    if (footerEticaLink) {
+        footerEticaLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            openEticaModal();
         });
+    }
+
+    if (denunciaFormContainer && closeDenunciaBtn && denunciaForm) {
 
         // Close when clicking X
         closeDenunciaBtn.addEventListener('click', (e) => {
             e.preventDefault();
-            denunciaFormContainer.classList.remove('show');
+            closeEticaModal();
         });
 
-        // Close when clicking outside of the dropdown
-        document.addEventListener('click', (e) => {
-            if (!denunciaFormContainer.contains(e.target) && e.target !== denunciaBtn) {
-                denunciaFormContainer.classList.remove('show');
-            }
+        // Close when clicking the overlay
+        if (denunciaOverlay) {
+            denunciaOverlay.addEventListener('click', closeEticaModal);
+        }
+
+        // Close on ESC key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeEticaModal();
         });
 
-        // Prevent closing when clicking inside the form container
+        // Prevent closing when clicking inside the modal
         denunciaFormContainer.addEventListener('click', (e) => {
             e.stopPropagation();
         });
@@ -255,7 +272,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     denunciaForm.reset();
                     // Close the form after a delay
                     setTimeout(() => {
-                        denunciaFormContainer.classList.remove('show');
+                        closeEticaModal();
                         denunciaMessage.textContent = "";
                         denunciaMessage.className = "form-message";
                     }, 4000);
@@ -273,3 +290,21 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+/**
+ * Global function to copy email to clipboard as a fallback for mailto
+ */
+window.copyEmail = function (text, element) {
+    navigator.clipboard.writeText(text).then(() => {
+        const feedback = element.querySelector('.copy-feedback');
+        if (feedback) {
+            feedback.classList.add('show');
+            setTimeout(() => {
+                feedback.classList.remove('show');
+            }, 2000);
+        }
+    }).catch(err => {
+        console.error('Falha ao copiar:', err);
+    });
+};
+

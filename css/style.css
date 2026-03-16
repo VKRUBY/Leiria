@@ -664,9 +664,7 @@ img {
 }
 
 .footer-contact ul li {
-    display: flex;
-    gap: 1rem;
-    align-items: center;
+    display: block;
 }
 
 .contact-list-avatars li {
@@ -683,7 +681,6 @@ img {
 
 .footer-contact ul li i {
     color: var(--primary-color);
-    margin-top: 5px;
 }
 
 .footer-bottom {
@@ -878,60 +875,67 @@ img {
 }
 
 /* ==========================================================================
-   Central de Denúncias (Dropdown Form)
+   Canal de Ética - Modal Global
    ========================================================================== */
-.denuncia-dropdown {
-    position: relative;
-    display: inline-block;
-    margin-left: 15px;
-}
 
-.denuncia-btn {
-    border-color: #e74c3c;
-    color: #e74c3c;
-}
-
-.denuncia-btn:hover {
-    background-color: #e74c3c;
-    color: #fff;
-    border-color: #e74c3c;
-}
-
-.denuncia-btn i {
-    margin-right: 5px;
-}
-
-/* Container escondido por padrão */
-.denuncia-form-container {
+/* Overlay escuro */
+.denuncia-overlay {
     display: none;
-    position: absolute;
-    top: calc(100% + 15px);
-    right: 0;
-    width: 350px;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 9998;
+    backdrop-filter: blur(2px);
+}
+
+.denuncia-overlay.show {
+    display: block;
+    animation: fadeIn 0.25s ease-out;
+}
+
+/* Modal centralizado */
+.denuncia-modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.96);
+    width: 92vw;
+    max-width: 440px;
+    max-height: 88vh;
+    overflow-y: auto;
     background-color: var(--bg-light);
-    border-radius: 8px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-    padding: 20px;
-    z-index: 1001;
-    border: 1px solid #eaeaea;
+    border-radius: 12px;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.25);
+    padding: 24px;
+    z-index: 9999;
     cursor: default;
 }
 
-/* Classe para exibir o dropdown via JS */
-.denuncia-form-container.show {
+.denuncia-modal.show {
     display: block;
-    animation: fadeInDown 0.3s ease-out;
+    animation: modalIn 0.28s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
-@keyframes fadeInDown {
+@keyframes modalIn {
     from {
         opacity: 0;
-        transform: translateY(-10px);
+        transform: translate(-50%, -50%) scale(0.9);
     }
 
     to {
         opacity: 1;
-        transform: translateY(0);
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
     }
 }
 
@@ -948,6 +952,8 @@ img {
     color: var(--text-dark);
     font-size: 1.1rem;
     font-weight: 700;
+    display: flex;
+    align-items: center;
 }
 
 .close-btn {
@@ -1004,16 +1010,17 @@ img {
 .denuncia-form .submit-btn {
     width: 100%;
     padding: 12px;
-    background-color: #e74c3c;
+    background-color: #1c2e42;
     color: #fff;
     border: none;
     border-radius: 4px;
     font-weight: 700;
     cursor: pointer;
+    transition: background-color 0.2s ease;
 }
 
 .denuncia-form .submit-btn:hover {
-    background-color: #c0392b;
+    background-color: #243b52;
 }
 
 .form-message {
@@ -1029,46 +1036,6 @@ img {
 
 .form-message.error {
     color: #e74c3c;
-}
-
-/* Responsivo para o formulário no mobile */
-@media (max-width: 768px) {
-    .denuncia-dropdown {
-        margin: 15px auto 0;
-        display: block;
-        width: 90%;
-    }
-
-    .denuncia-btn {
-        width: 100%;
-    }
-
-    .denuncia-form-container {
-        position: static;
-        width: 100%;
-        margin-top: 10px;
-        box-shadow: none;
-        border: 1px solid #333;
-        /* border color to match mobile dark menu */
-        background-color: var(--bg-darker);
-    }
-
-    .denuncia-header h4,
-    .denuncia-form label,
-    .denuncia-desc {
-        color: var(--text-light);
-    }
-
-    .denuncia-header {
-        border-bottom-color: #333;
-    }
-
-    .denuncia-form input,
-    .denuncia-form textarea {
-        background-color: #222;
-        color: #fff;
-        border-color: #444;
-    }
 }
 
 /* ==========================================================================
@@ -1111,4 +1078,68 @@ img {
     font-weight: 600;
     letter-spacing: 0.05em;
     text-transform: uppercase;
+}
+
+/* ==========================================================================
+   WhatsApp Floating Button
+   ========================================================================== */
+.whatsapp-float {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 40px;
+    right: 40px;
+    background-color: #25d366;
+    color: #FFF;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 30px;
+    box-shadow: 2px 2px 3px #999;
+    z-index: 1001;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-smooth);
+}
+
+.whatsapp-float:hover {
+    background-color: #128c7e;
+    transform: scale(1.1);
+    color: #FFF;
+}
+
+@media (max-width: 768px) {
+    .whatsapp-float {
+        width: 50px;
+        height: 50px;
+        bottom: 20px;
+        right: 20px;
+        font-size: 25px;
+    }
+}
+
+/* Copy Email Fallback */
+#copy-feedback.show,
+.copy-feedback.show {
+    opacity: 1;
+}
+
+/* Contact Row - uniform structure for all footer contact items */
+.contact-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.contact-sublabel {
+    font-size: 0.72rem;
+    color: #555;
+    padding-left: 1.5rem;
+    margin-top: 2px;
+}
+
+/* Footer Ethics link style */
+#footer-etica-link {
+    display: inline-flex;
+    align-items: center;
 }
