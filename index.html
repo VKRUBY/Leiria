@@ -584,7 +584,10 @@
             <button id="close-denuncia" class="close-btn"><i class="fa-solid fa-xmark"></i></button>
         </div>
         <p class="denuncia-desc">Seu relato é confidencial. Descreva o ocorrido abaixo.</p>
-        <form id="denuncia-form" class="denuncia-form">
+        <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+        <form id="denuncia-form" class="denuncia-form"
+            action="https://site-leiria-n8n-leiria.kk7xlj.easypanel.host/webhook/denuncias-recebidas" method="POST"
+            target="hidden_iframe">
             <div class="form-group">
                 <label for="denuncia-empresa">Empresa Relacionada</label>
                 <input type="text" id="denuncia-empresa" name="empresa" placeholder="Ex: Fornecedor X" required>

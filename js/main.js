@@ -233,56 +233,39 @@ document.addEventListener('DOMContentLoaded', () => {
             e.stopPropagation();
         });
 
-        // Form Submission (AJAX Fetch mapped to n8n Webhook)
-        denunciaForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
+        // Form Submission (Using Hidden Iframe to bypass CORS)
+        let submitted = false;
+        const hiddenIframe = document.getElementById('hidden_iframe');
 
-            // Disable button
+        denunciaForm.addEventListener('submit', (e) => {
+            // Permitimos o evento padrão (submissão para o iframe)
+
+            // UI Feedback
             const originalBtnText = btnSubmitDenuncia.innerText;
             btnSubmitDenuncia.innerText = "Enviando...";
             btnSubmitDenuncia.disabled = true;
             denunciaMessage.textContent = "";
             denunciaMessage.className = "form-message";
+            submitted = true;
+        });
 
-            const rawFormData = new FormData(denunciaForm);
-            const formData = new URLSearchParams();
-            formData.append('empresa', rawFormData.get('empresa'));
-            formData.append('nome', rawFormData.get('nome') || 'Não Informado');
-            formData.append('cnpj', rawFormData.get('cnpj') || 'Não Informado');
-            formData.append('relato', rawFormData.get('relato'));
-            formData.append('data_envio', new Date().toISOString());
+        hiddenIframe.addEventListener('load', () => {
+            if (submitted) {
+                denunciaMessage.textContent = "Sua denúncia foi enviada com sucesso! Obrigado.";
+                denunciaMessage.classList.add("success");
+                denunciaForm.reset();
 
-            // n8n Webhook Target Endpoint Placeholder
-            const webhookUrl = "https://site-leiria-n8n-leiria.kk7xlj.easypanel.host/webhook/denuncias-recebidas";
-
-            try {
-                const response = await fetch(webhookUrl, {
-                    method: 'POST',
-                    body: formData
-                    // Ao não enviar headers explicitamente como application/json, 
-                    // evitamos a requisição de Preflight (OPTIONS) do CORS.
-                });
-
-                if (response.ok) {
-                    denunciaMessage.textContent = "Sua denúncia foi enviada com sucesso! Obrigado.";
-                    denunciaMessage.classList.add("success");
-                    denunciaForm.reset();
-                    // Close the form after a delay
-                    setTimeout(() => {
-                        closeEticaModal();
-                        denunciaMessage.textContent = "";
-                        denunciaMessage.className = "form-message";
-                    }, 4000);
-                } else {
-                    throw new Error('Erro na resposta do servidor.');
-                }
-            } catch (error) {
-                console.error("Error submitting form:", error);
-                denunciaMessage.textContent = "Ocorreu um erro ao enviar. Tente novamente mais tarde.";
-                denunciaMessage.classList.add("error");
-            } finally {
-                btnSubmitDenuncia.innerText = originalBtnText;
+                // Reset flag and button
+                submitted = false;
+                btnSubmitDenuncia.innerText = "Enviar Relato";
                 btnSubmitDenuncia.disabled = false;
+
+                // Close the form after a delay
+                setTimeout(() => {
+                    closeEticaModal();
+                    denunciaMessage.textContent = "";
+                    denunciaMessage.className = "form-message";
+                }, 4000);
             }
         });
     }
