@@ -244,26 +244,22 @@ document.addEventListener('DOMContentLoaded', () => {
             denunciaMessage.textContent = "";
             denunciaMessage.className = "form-message";
 
-            const formData = new FormData(denunciaForm);
-            const payload = {
-                empresa: formData.get('empresa'),
-                nome: formData.get('nome') || 'Não Informado',
-                cnpj: formData.get('cnpj') || 'Não Informado',
-                relato: formData.get('relato'),
-                data_envio: new Date().toISOString()
-            };
+            const formData = new URLSearchParams();
+            formData.append('empresa', payload.empresa);
+            formData.append('nome', payload.nome);
+            formData.append('cnpj', payload.cnpj);
+            formData.append('relato', payload.relato);
+            formData.append('data_envio', payload.data_envio);
 
             // n8n Webhook Target Endpoint Placeholder
-            // Replace this with your actual n8n production webhook URL!
             const webhookUrl = "https://site-leiria-n8n-leiria.kk7xlj.easypanel.host/webhook/denuncias-recebidas";
 
             try {
                 const response = await fetch(webhookUrl, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(payload)
+                    body: formData
+                    // Ao não enviar headers explicitamente como application/json, 
+                    // evitamos a requisição de Preflight (OPTIONS) do CORS.
                 });
 
                 if (response.ok) {
