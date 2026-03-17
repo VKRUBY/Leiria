@@ -244,12 +244,13 @@ document.addEventListener('DOMContentLoaded', () => {
             denunciaMessage.textContent = "";
             denunciaMessage.className = "form-message";
 
+            const rawFormData = new FormData(denunciaForm);
             const formData = new URLSearchParams();
-            formData.append('empresa', payload.empresa);
-            formData.append('nome', payload.nome);
-            formData.append('cnpj', payload.cnpj);
-            formData.append('relato', payload.relato);
-            formData.append('data_envio', payload.data_envio);
+            formData.append('empresa', rawFormData.get('empresa'));
+            formData.append('nome', rawFormData.get('nome') || 'Não Informado');
+            formData.append('cnpj', rawFormData.get('cnpj') || 'Não Informado');
+            formData.append('relato', rawFormData.get('relato'));
+            formData.append('data_envio', new Date().toISOString());
 
             // n8n Webhook Target Endpoint Placeholder
             const webhookUrl = "https://site-leiria-n8n-leiria.kk7xlj.easypanel.host/webhook/denuncias-recebidas";
